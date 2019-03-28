@@ -24,8 +24,11 @@ public class PlayerMoveScript : MonoBehaviour {
     public float fireRate = 0F;
     private float nextFire = 5.0F;
 
+    public int health;
+
     // Use this for initialization
     void Start () {
+        health = 100;
         body = transform;
         rigidBody = GetComponent<Rigidbody>();
     }
@@ -68,6 +71,12 @@ public class PlayerMoveScript : MonoBehaviour {
                 Debug.Log("fire left");
                 GetComponent<Gun>().Shoot(rightFire);
             }
+        }
+
+        if (health <= 0)
+        {
+            GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<Rigidbody>().drag = 10;
         }
     }
 

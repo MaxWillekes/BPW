@@ -18,7 +18,21 @@ public class Bullet : MonoBehaviour
     {
         if (other.name == "pCylinder3")
         {
-            Debug.Log("Warcrime :-D");
+            other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health -= Random.Range(10, 25);
+            Debug.Log(other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health);
+
+            if ( other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health <= 0)
+            {
+                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().drag = 10;
+
+                if (other.GetComponent<ParticleSystem>().isPlaying == false)
+                {
+                    GameObject.Find("GameManager").GetComponent<GameManagerScript>().airShipsNumberRemaining--;
+                }
+
+                other.GetComponent<ParticleSystem>().Play();
+            }
         }
     }
 }
