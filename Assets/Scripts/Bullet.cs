@@ -18,20 +18,26 @@ public class Bullet : MonoBehaviour
     {
         if (other.name == "pCylinder3")
         {
-            other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health -= Random.Range(10, 25);
-            Debug.Log(other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health);
-
-            if ( other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health <= 0)
+            if(other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.name == "EnemyAirship")
             {
-                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().drag = 10;
+                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health -= Random.Range(10, 25);
 
-                if (other.GetComponent<ParticleSystem>().isPlaying == false)
+                if (other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health <= 0)
                 {
-                    GameObject.Find("GameManager").GetComponent<GameManagerScript>().airShipsNumberRemaining--;
-                }
+                    other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                    other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().drag = 10;
 
-                other.GetComponent<ParticleSystem>().Play();
+                    if (other.GetComponent<ParticleSystem>().isPlaying == false)
+                    {
+                        GameObject.Find("GameManager").GetComponent<GameManagerScript>().airShipsNumberRemaining--;
+                    }
+
+                    other.GetComponent<ParticleSystem>().Play();
+                }
+            }
+            else if (other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.name == "Airship")
+            {
+                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<PlayerMoveScript>().health -= Random.Range(10, 25);
             }
         }
     }
