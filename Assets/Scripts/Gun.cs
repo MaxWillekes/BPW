@@ -30,7 +30,7 @@ public class Gun : MonoBehaviour
 
         while (cannonsFired < 12) {
             shootingPosition.transform.localPosition = new Vector3(sideVal, 0, cannonsFired - 5);
-            shootingPosition.transform.localRotation = Quaternion.Euler(0, sideRot, 0);
+            shootingPosition.transform.localRotation = Quaternion.Euler(0, (180 + sideRot), 0);
             GameObject bullet = Instantiate(bulletPrefab, shootingPosition.position, shootingPosition.rotation);
             Rigidbody bulletRigidBody = bullet.GetComponent<Rigidbody>();
             bulletRigidBody.AddForce(shootingForce * bullet.transform.forward);

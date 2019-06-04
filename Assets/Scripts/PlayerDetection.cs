@@ -8,7 +8,7 @@ public class PlayerDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Airship")
+        if (other.tag == "Airship")
         {
             GetComponent<Gun>().Shoot(rightSide);
         }

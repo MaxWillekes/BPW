@@ -6,26 +6,43 @@ public class Bullet : MonoBehaviour
 {
     Collider ownCollider;
     public bool enter = true;
+    int extraRotation;
+
+    GameObject hitObject;
 
     void Start()
     {
         ownCollider = gameObject.AddComponent<BoxCollider>();
         ownCollider.isTrigger = true;
         Destroy(gameObject, 2);
+
+        /*
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveScript>().rightFire)
+        {
+            extraRotation = 90;
+        }
+        else
+        {
+            extraRotation = 270;
+        }
+
+        gameObject.transform.localRotation = Quaternion.Euler(+0, +extraRotation, +0);*/
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "pCylinder3")
+        if (other.tag == "AirshipHitboxTag")
         {
-            if(other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.name == "EnemyAirship")
-            {
-                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health -= Random.Range(10, 25);
+            hitObject = other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject;
 
-                if (other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<EnemyMovement>().health <= 0)
+            if (hitObject.tag == "EnemyAirship")
+            {
+                hitObject.GetComponent<EnemyMovement>().health -= Random.Range(10, 25);
+
+                if (hitObject.GetComponent<EnemyMovement>().health <= 0)
                 {
-                    other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                    other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<Rigidbody>().drag = 10;
+                    hitObject.GetComponent<Rigidbody>().useGravity = true;
+                    hitObject.GetComponent<Rigidbody>().drag = 10;
 
                     if (other.GetComponent<ParticleSystem>().isPlaying == false)
                     {
@@ -35,9 +52,9 @@ public class Bullet : MonoBehaviour
                     other.GetComponent<ParticleSystem>().Play();
                 }
             }
-            else if (other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.transform.name == "Airship")
+            else if (hitObject.tag == "Player")
             {
-                other.transform.parent.gameObject.transform.parent.gameObject.transform.parent.gameObject.GetComponent<PlayerMoveScript>().health -= Random.Range(10, 25);
+                hitObject.GetComponent<PlayerMoveScript>().health -= Random.Range(10, 25);
             }
         }
     }

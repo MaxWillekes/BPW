@@ -57,7 +57,6 @@ public class PlayerMoveScript : MonoBehaviour {
         float hor = -Input.GetAxis("Vertical");
         float vert = Input.GetAxis("Vert");
 
-
         if (rot == 1) {
             rotVal += 0.1f;
         } else if (rot == -1) {
@@ -93,18 +92,18 @@ public class PlayerMoveScript : MonoBehaviour {
     void FixedUpdate() {
         rigidBody.MovePosition(position);
     }
-
+    
     void OnTriggerStay(Collider other)
     {
-        if (other.transform.parent.GetComponent<EnemyMovement>().health > 0)
+        if (other.gameObject.name != "Bullet(Clone)" && other.transform.parent.GetComponent<EnemyMovement>().health > 0)
         {
-            if (other.name == "TriggerRight" && Time.time > nextFireEnemy)
+            if (other.tag == "TriggerRight" && Time.time > nextFireEnemy)
             {
                 nextFireEnemy = Time.time + fireRate;
                 other.transform.parent.GetComponent<Gun>().Shoot(false);
                 other.transform.parent.GetComponent<AudioSource>().Play();
             }
-            else if (other.name == "TriggerLeft" && Time.time > nextFireEnemy)
+            else if (other.tag == "TriggerLeft" && Time.time > nextFireEnemy)
             {
                 nextFireEnemy = Time.time + fireRate;
                 other.transform.parent.GetComponent<Gun>().Shoot(true);
