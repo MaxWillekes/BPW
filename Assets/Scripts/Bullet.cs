@@ -15,18 +15,6 @@ public class Bullet : MonoBehaviour
         ownCollider = gameObject.AddComponent<BoxCollider>();
         ownCollider.isTrigger = true;
         Destroy(gameObject, 2);
-
-        /*
-        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMoveScript>().rightFire)
-        {
-            extraRotation = 90;
-        }
-        else
-        {
-            extraRotation = 270;
-        }
-
-        gameObject.transform.localRotation = Quaternion.Euler(+0, +extraRotation, +0);*/
     }
 
     private void OnTriggerEnter(Collider other)

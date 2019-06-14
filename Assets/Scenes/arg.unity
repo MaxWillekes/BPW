@@ -820,6 +820,9 @@ MonoBehaviour:
   MaxDist: 35
   player: {fileID: 782404942}
   health: 1000
+  side: 
+  firing: 0
+  fireRate: 5
 --- !u!82 &636650360
 AudioSource:
   m_ObjectHideFlags: 0
@@ -950,6 +953,8 @@ MonoBehaviour:
     type: 3}
   shootingPosition: {fileID: 1129593559}
   shootingForce: -5
+  cannons: {fileID: 8300000, guid: 4d963a3511aaecd44b38b20fd65fa341, type: 3}
+  alternativeShot: 0
 --- !u!1 &637100274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1161,7 +1166,7 @@ MonoBehaviour:
   rotVal: 0
   rightFire: 0
   fireRate: 5
-  health: 9000
+  health: 1000
 --- !u!4 &782404942
 Transform:
   m_ObjectHideFlags: 0
@@ -1211,6 +1216,8 @@ MonoBehaviour:
     type: 3}
   shootingPosition: {fileID: 912156981}
   shootingForce: -5
+  cannons: {fileID: 8300000, guid: 4d963a3511aaecd44b38b20fd65fa341, type: 3}
+  alternativeShot: 0
 --- !u!64 &782404945
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -6628,6 +6635,8 @@ MonoBehaviour:
     type: 3}
   shootingPosition: {fileID: 234722821}
   shootingForce: -5
+  cannons: {fileID: 8300000, guid: 4d963a3511aaecd44b38b20fd65fa341, type: 3}
+  alternativeShot: 0
 --- !u!54 &1093596812
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6662,6 +6671,9 @@ MonoBehaviour:
   MaxDist: 35
   player: {fileID: 782404942}
   health: 1000
+  side: 
+  firing: 0
+  fireRate: 5
 --- !u!4 &1093596814
 Transform:
   m_ObjectHideFlags: 0
@@ -6669,8 +6681,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1093596810}
-  m_LocalRotation: {x: -0, y: -0.4230707, z: -0, w: 0.9060967}
-  m_LocalPosition: {x: 507.1, y: 30, z: 458.5}
+  m_LocalRotation: {x: -0, y: 0.4155931, z: -0, w: 0.90955067}
+  m_LocalPosition: {x: 283.9, y: 30, z: 437.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1251841234}
@@ -6679,7 +6691,7 @@ Transform:
   - {fileID: 1115078393}
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: -50.057003, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 49.113003, z: 0}
 --- !u!82 &1093596815
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17650,6 +17662,8 @@ MonoBehaviour:
     type: 3}
   shootingPosition: {fileID: 1997921187}
   shootingForce: -5
+  cannons: {fileID: 8300000, guid: 4d963a3511aaecd44b38b20fd65fa341, type: 3}
+  alternativeShot: 0
 --- !u!54 &1898275259
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17684,6 +17698,9 @@ MonoBehaviour:
   MaxDist: 35
   player: {fileID: 782404942}
   health: 1000
+  side: 
+  firing: 0
+  fireRate: 5
 --- !u!4 &1898275261
 Transform:
   m_ObjectHideFlags: 0
@@ -17960,11 +17977,11 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.1
-  far clip plane: 150
+  far clip plane: 250
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: -5
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

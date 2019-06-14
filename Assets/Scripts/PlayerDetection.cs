@@ -10,7 +10,7 @@ public class PlayerDetection : MonoBehaviour
     {
         if (other.tag == "Airship")
         {
-            GetComponent<Gun>().Shoot(rightSide);
+            GetComponent<Gun>().Shoot(rightSide, (Random.value > 0.5f));
         }
     }
 }

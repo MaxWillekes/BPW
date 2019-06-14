@@ -16,6 +16,11 @@ public class GameManagerScript : MonoBehaviour
     public GameObject LostScreen;
     public GameObject VictoryScreen;
 
+    private void Awake()
+    {
+        Cursor.visible = false;
+    }
+
     void Update()
     {
         playerHealth = playerShip.GetComponent<PlayerMoveScript>().health;
@@ -26,12 +31,14 @@ public class GameManagerScript : MonoBehaviour
         {
             StandardUI.SetActive(false);
             VictoryScreen.SetActive(true);
+            Cursor.visible = true;
         }
 
-        if (playerShip.GetComponent<PlayerMoveScript>().health <= 0)
+        if (playerShip.GetComponent<PlayerMoveScript>().health <= 0 && playerShip.transform.position.y <= 15)
         {
             StandardUI.SetActive(false);
             LostScreen.SetActive(true);
+            Cursor.visible = true;
         }
     }
 

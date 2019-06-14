@@ -44,11 +44,7 @@ public class PlayerMoveScript : MonoBehaviour {
         {
             GetComponent<Rigidbody>().useGravity = true;
             GetComponent<Rigidbody>().drag = 5;
-            
-            if(transform.position.y <= 20)
-            {
-                Debug.Log("endGame");
-            }
+            moveSpeed = 0;
         }
 
         float mouseX = Input.GetAxis("Mouse X");
@@ -77,14 +73,27 @@ public class PlayerMoveScript : MonoBehaviour {
             if (angleX >= 70 && Time.time > nextFire) {
                 nextFire = Time.time + fireRate;
                 rightFire = true;
-                GetComponent<Gun>().Shoot(rightFire);
-                GetComponent<AudioSource>().Play();
+                GetComponent<Gun>().Shoot(rightFire, false);
             }
             else if(angleX <= -70 && Time.time > nextFire) {
                 nextFire = Time.time + fireRate;
                 rightFire = false;
-                GetComponent<Gun>().Shoot(rightFire);
-                GetComponent<AudioSource>().Play();
+                GetComponent<Gun>().Shoot(rightFire, false);
+            }
+        }
+        else if(Input.GetMouseButtonDown(1) && health > 0)
+        {
+            if (angleX >= 70 && Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                rightFire = true;
+                GetComponent<Gun>().Shoot(rightFire, true);
+            }
+            else if (angleX <= -70 && Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                rightFire = false;
+                GetComponent<Gun>().Shoot(rightFire, true);
             }
         }
     }
@@ -93,22 +102,28 @@ public class PlayerMoveScript : MonoBehaviour {
         rigidBody.MovePosition(position);
     }
     
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name != "Bullet(Clone)" && other.transform.parent.GetComponent<EnemyMovement>().health > 0)
         {
-            if (other.tag == "TriggerRight" && Time.time > nextFireEnemy)
+            if (other.tag == "TriggerRight")
             {
-                nextFireEnemy = Time.time + fireRate;
-                other.transform.parent.GetComponent<Gun>().Shoot(false);
-                other.transform.parent.GetComponent<AudioSource>().Play();
+                other.transform.parent.GetComponent<EnemyMovement>().side = "TriggerRight";
+                other.transform.parent.GetComponent<EnemyMovement>().firing = true;
             }
-            else if (other.tag == "TriggerLeft" && Time.time > nextFireEnemy)
+            else if (other.tag == "TriggerLeft")
             {
-                nextFireEnemy = Time.time + fireRate;
-                other.transform.parent.GetComponent<Gun>().Shoot(true);
-                other.transform.parent.GetComponent<AudioSource>().Play();
+                other.transform.parent.GetComponent<EnemyMovement>().side = "TriggerLeft";
+                other.transform.parent.GetComponent<EnemyMovement>().firing = true;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name != "Bullet(Clone)" && other.transform.parent.GetComponent<EnemyMovement>().health > 0)
+        {
+            other.transform.parent.GetComponent<EnemyMovement>().firing = false;
         }
     }
 }
